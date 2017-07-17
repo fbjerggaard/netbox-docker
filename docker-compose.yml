@@ -28,6 +28,19 @@ services:
             POSTGRES_USER: netbox
             POSTGRES_PASSWORD: J5brHrAXFLQSif0K
             POSTGRES_DB: netbox
+    phppgadmin:
+        image: einfallstoll/phppgadmin
+        container_name: phppgadmin
+        environment:
+            APACHE_SERVERNAME: docker.local
+            POSTGRES_HOST: postgres
+            POSTGRES_DB: 5432
+        links:
+        - postgres
+        depends_on:
+        - postgres
+        ports:
+        - 80
 volumes:
     netbox-static-files:
         driver: local

@@ -51,3 +51,25 @@ You can configure the app at runtime using variables (see `docker-compose.yml`).
 * SHORT_TIME_FORMAT
 * DATETIME_FORMAT
 * SHORT_DATETIME_FORMAT
+
+### Testing gralhql module
+
+This docker image contains last version of netbox downloaded from digital ocean repository. 
+Last version of graphql for netbox is located under docker/django-netbox-graphql-0.0.2.tar.gz. 
+This module will be installed automatically with docker build. Files settings.py and urls.py contains extra lines
+with links and configuration for graphql, because of that they gonna be overwrite with files from docker folder.
+ 
+The easiest way to test query is with UI editor:
+http://localhost:XXXXX/graphql/client
+
+Testing with curl requires token:
+Make new token http://localhost:XXXXX/user/api-tokens/ have to be logged in (admin/admin)
+
+You can see from here crud examples https://github.com/ninech/django-netbox-graphql/tree/35080-token-authorisation#graphql-crud-examples
+ 
+Docker configuration contains phppgadmin access which can provide loading dump_docker data. 
+http://localhost:XXXXX/phppgadmin/
+
+Default login are values from docker.env for fields
+* DB_USER # netbox
+* DB_PASSWORD # J5brHrAXFLQSif0K

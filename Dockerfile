@@ -26,7 +26,14 @@ RUN wget -q -O - "${URL}" | tar xz \
 WORKDIR /opt/netbox
 RUN pip install -r requirements.txt
 
+COPY docker/django-netbox-graphql-0.0.2.tar.gz /opt
+RUN pip install /opt/django-netbox-graphql-0.0.2.tar.gz
+
+COPY docker/settings.py /opt/netbox/netbox/netbox/settings.py
+COPY docker/urls.py /opt/netbox/netbox/netbox/urls.py
+
 RUN ln -s configuration.docker.py netbox/netbox/configuration.py
+
 COPY docker/gunicorn_config.py /opt/netbox/
 COPY docker/nginx.conf /etc/netbox-nginx/nginx.conf
 
